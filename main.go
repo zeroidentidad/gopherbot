@@ -68,7 +68,8 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		s.ChannelMessageSend(m.ChannelID, `Comandos:
 			"go links" - lista enlaces utiles
 
-			-coder: zeroidentidad
+			-by: zeroidentidad
+			-server: https://discord.io/awebytes
 		`)
 	}
 
