@@ -64,9 +64,11 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		return
 	}
 	// If the message is "ping" reply with "Pong!"
-	if m.Content == "go help" {
+	if m.Content == "go ayuda" {
 		s.ChannelMessageSend(m.ChannelID, `Comandos:
 			"go links" - lista enlaces utiles
+
+			-coder: zeroidentidad
 		`)
 	}
 
