@@ -3,6 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
+	"log"
+	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
@@ -39,6 +41,8 @@ func main() {
 		fmt.Println("error opening connection,", err)
 		return
 	}
+
+	go func() { log.Fatal("error starting http server", http.ListenAndServe(":3000", nil)) }()
 
 	// Wait here until CTRL-C or other term signal is received.
 	fmt.Println("Bot is now running.  Press CTRL-C to exit.")
