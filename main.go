@@ -45,7 +45,7 @@ func main() {
 	go func() { log.Fatal("error starting http server", http.ListenAndServe(":3000", nil)) }()
 
 	// Wait here until CTRL-C or other term signal is received.
-	fmt.Println("Bot is now running.  Press CTRL-C to exit.")
+	fmt.Println("Bot is running. Press CTRL-C to exit.")
 	sc := make(chan os.Signal, 1)
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt, os.Kill)
 	<-sc
@@ -63,18 +63,29 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	if m.Author.ID == s.State.User.ID {
 		return
 	}
-	// If the message is "ping" reply with "Pong!"
-	if m.Content == "go ayuda" {
-		s.ChannelMessageSend(m.ChannelID, `Comandos:
-			"go links" - lista enlaces utiles
 
-			-by: zeroidentidad
-			-server: https://discord.io/awebytes
+	// Organizar mensajes en otro paquete:
+	if m.Content == ".go" {
+		s.ChannelMessageSend(m.ChannelID, `
+			Hola gopher, para comandos disponibles envia: .go ayuda
 		`)
 	}
 
-	// If the message is "pong" reply with "Ping!"
-	if m.Content == "pong" {
-		s.ChannelMessageSend(m.ChannelID, "Ping!")
+	if m.Content == ".go ayuda" {
+		s.ChannelMessageSend(m.ChannelID, `
+			Comandos:
+			**go links** - lista enlaces utiles
+			... en desarrollo
+
+			**by**: zeroidentidad
+			**server**: https://discord.io/awebytes
+		`)
+	}
+
+	if m.Content == "bot" {
+		s.ChannelMessageSend(m.ChannelID, `
+			Hola, envia: .go
+			Para usar el gopherbot
+			`)
 	}
 }
