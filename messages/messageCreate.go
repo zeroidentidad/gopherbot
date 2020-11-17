@@ -9,13 +9,13 @@ func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 
 	if m.Content == ".go" {
-		s.ChannelMessageSend(m.ChannelID, `
+		_, _ = s.ChannelMessageSend(m.ChannelID, `
 			Hola gopher, para comandos disponibles envia: .go ayuda
 		`)
 	}
 
 	if m.Content == ".go ayuda" {
-		s.ChannelMessageSend(m.ChannelID, `
+		_, _ = s.ChannelMessageSend(m.ChannelID, `
 			Comandos:
 			**go links** - lista enlaces utiles
 			... en desarrollo
@@ -26,7 +26,7 @@ func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 
 	if m.Content == "bot" {
-		s.ChannelMessageSend(m.ChannelID, `
+		_, _ = s.ChannelMessageSend(m.ChannelID, `
 			Hola, envia: .go
 			Para usar el gopherbot
 			`)

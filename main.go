@@ -5,23 +5,19 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"os/exec"
 	"os/signal"
 	"syscall"
 
 	"github.com/bwmarrin/discordgo"
+	"github.com/zeroidentidad/gopherbot/config"
 	"github.com/zeroidentidad/gopherbot/messages"
 	"github.com/zeroidentidad/gopherbot/status"
 )
 
-var (
-	Token string = "NzY3OTc5MDk4NzY4NDA4NTg2.X45yRQ.U-ue6pQabGEFui8pFqIqtFvSJ94"
-)
-
 func main() {
-	dg, err := discordgo.New("Bot " + Token)
+	dg, err := discordgo.New("Bot " + config.Token)
 	if err != nil {
-		fmt.Println("error creating session,", err)
+		fmt.Println("Session error:", err)
 		return
 	}
 
@@ -38,8 +34,7 @@ func main() {
 	}
 
 	go func() {
-		log.Fatal("Error starting http server", http.ListenAndServe(":3000", nil))
-		_, _ = exec.Command("ping", "-t", "discord.com").Output()
+		log.Fatal("Error starting server", http.ListenAndServe(":"+config.Port(), nil))
 	}()
 
 	// Until CTRL-C or other term signal.
