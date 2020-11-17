@@ -2,8 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
@@ -36,7 +34,6 @@ func main() {
 	/*go func() {
 		log.Fatal("Error http server", http.ListenAndServe(":"+config.Port(), nil))
 	}()*/
-
 	// Until CTRL-C or other term signal.
 	fmt.Println("Bot running. Press CTRL-C to exit.")
 	sc := make(chan os.Signal, 1)
