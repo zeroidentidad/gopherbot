@@ -1,91 +1,52 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
+	"os/exec"
 	"os/signal"
 	"syscall"
 
 	"github.com/bwmarrin/discordgo"
+	"github.com/zeroidentidad/gopherbot/messages"
+	"github.com/zeroidentidad/gopherbot/status"
 )
 
-// Variables used for command line parameters
 var (
-	Token string
+	Token string = "NzY3OTc5MDk4NzY4NDA4NTg2.X45yRQ.U-ue6pQabGEFui8pFqIqtFvSJ94"
 )
-
-func init() {
-
-	flag.StringVar(&Token, "t", "NzY3OTc5MDk4NzY4NDA4NTg2.X45yRQ.U-ue6pQabGEFui8pFqIqtFvSJ94", "Bot Token")
-	flag.Parse()
-}
 
 func main() {
-
-	// Create a new Discord session using the provided bot token.
 	dg, err := discordgo.New("Bot " + Token)
 	if err != nil {
-		fmt.Println("error creating Discord session,", err)
+		fmt.Println("error creating session,", err)
 		return
 	}
 
-	// Register the messageCreate func as a callback for MessageCreate events.
-	dg.AddHandler(messageCreate)
+	dg.Debug = true
 
-	// Open a websocket connection to Discord and begin listening.
+	// Register handlers.
+	dg.AddHandler(messages.MessageCreate)
+	dg.AddHandler(status.SetStatus)
+
 	err = dg.Open()
 	if err != nil {
-		fmt.Println("error opening connection,", err)
+		fmt.Println("Websocket connection error,", err)
 		return
 	}
 
-	go func() { log.Fatal("error starting http server", http.ListenAndServe(":3000", nil)) }()
+	go func() {
+		log.Fatal("Error starting http server", http.ListenAndServe(":3000", nil))
+		_, _ = exec.Command("ping", "-t", "discord.com").Output()
+	}()
 
-	// Wait here until CTRL-C or other term signal is received.
-	fmt.Println("Bot is running. Press CTRL-C to exit.")
+	// Until CTRL-C or other term signal.
+	fmt.Println("Bot running. Press CTRL-C to exit.")
 	sc := make(chan os.Signal, 1)
-	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt, os.Kill)
+	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)
 	<-sc
-
-	// Cleanly close down the Discord session.
+	// Close session.
 	dg.Close()
-}
-
-// This function will be called (due to AddHandler above) every time a new
-// message is created on any channel that the autenticated bot has access to.
-func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
-
-	// Ignore all messages created by the bot itself
-	// This isn't required in this specific example but it's a good practice.
-	if m.Author.ID == s.State.User.ID {
-		return
-	}
-
-	// Organizar mensajes en otro paquete:
-	if m.Content == ".go" {
-		s.ChannelMessageSend(m.ChannelID, `
-			Hola gopher, para comandos disponibles envia: .go ayuda
-		`)
-	}
-
-	if m.Content == ".go ayuda" {
-		s.ChannelMessageSend(m.ChannelID, `
-			Comandos:
-			**go links** - lista enlaces utiles
-			... en desarrollo
-
-			**by**: zeroidentidad
-			**server**: https://discord.io/awebytes
-		`)
-	}
-
-	if m.Content == "bot" {
-		s.ChannelMessageSend(m.ChannelID, `
-			Hola, envia: .go
-			Para usar el gopherbot
-			`)
-	}
 }
