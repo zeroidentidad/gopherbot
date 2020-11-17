@@ -33,9 +33,9 @@ func main() {
 		return
 	}
 
-	go func() {
-		log.Fatal("Error starting server", http.ListenAndServe(":"+config.Port(), nil))
-	}()
+	/*go func() {
+		log.Fatal("Error http server", http.ListenAndServe(":"+config.Port(), nil))
+	}()*/
 
 	// Until CTRL-C or other term signal.
 	fmt.Println("Bot running. Press CTRL-C to exit.")
