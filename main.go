@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	"log"
 	"os"
 	"os/signal"
 	"syscall"
@@ -13,12 +13,11 @@ import (
 )
 
 func main() {
-	dg, err := discordgo.New("Bot " + config.Token)
+	dg, err := discordgo.New("Bot " + config.TOKEN)
 	if err != nil {
-		fmt.Println("Session error:", err)
+		log.Println("Session error:", err)
 		return
 	}
-
 	dg.Debug = true
 
 	// Register handlers.
@@ -27,15 +26,18 @@ func main() {
 
 	err = dg.Open()
 	if err != nil {
-		fmt.Println("Websocket connection error,", err)
+		log.Println("Websocket error,", err)
 		return
 	}
 
 	/*go func() {
-		log.Fatal("Error http server", http.ListenAndServe(":"+config.Port(), nil))
+		log.Fatal("Err http serv",
+		http.ListenAndServe(":"+config.Port(),
+		nil))
 	}()*/
+
 	// Until CTRL-C or other term signal.
-	fmt.Println("Bot running. Press CTRL-C to exit.")
+	log.Println("Bot running. Press CTRL-C to exit.")
 	sc := make(chan os.Signal, 1)
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)
 	<-sc
