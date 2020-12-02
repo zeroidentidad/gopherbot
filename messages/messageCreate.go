@@ -10,14 +10,15 @@ func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	if m.Content == ".go" {
 		_, _ = s.ChannelMessageSend(m.ChannelID, `
-			Hola gopher, para comandos disponibles envia: .go ayuda
+			Hola gopher, para comandos disponibles envia: **.go ayuda**
 		`)
 	}
 
 	if m.Content == ".go ayuda" {
 		_, _ = s.ChannelMessageSend(m.ChannelID, `
 			Comandos:
-			**go links** - lista enlaces utiles
+			**.go links** - lista enlaces utiles
+			**.go ayuda** - comandos principales
 			... en desarrollo
 
 			**by**: zeroidentidad
