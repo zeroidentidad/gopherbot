@@ -1,7 +1,7 @@
 package status
 
 import (
-	"fmt"
+	"log"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -9,5 +9,5 @@ import (
 func SetStatus(discord *discordgo.Session, ready *discordgo.Ready) {
 	_ = discord.UpdateStatus(1, ".go Googleando")
 	servers := discord.State.Guilds
-	fmt.Printf("Bot iniciado en %d servers", len(servers))
+	log.Printf("Bot iniciado en %d servers", len(servers))
 }
