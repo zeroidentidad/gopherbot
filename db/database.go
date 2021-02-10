@@ -19,7 +19,7 @@ func SQLiteConn() *sql.DB {
 		return db
 	}
 
-	db, err := sql.Open("sqlite3", "/data.sqlite")
+	db, err := sql.Open("sqlite3", "/data")
 	if err != nil {
 		panic(err)
 	}
