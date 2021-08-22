@@ -15,6 +15,3 @@
 # vendor/
 .env
 tmp/
-
-# personal researchs notes
-NOTES.md
