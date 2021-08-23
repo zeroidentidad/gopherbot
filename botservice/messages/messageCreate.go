@@ -4,7 +4,7 @@ import (
 	"database/sql"
 
 	"github.com/bwmarrin/discordgo"
-	"github.com/zeroidentidad/gopherbot/db"
+	"github.com/zeroidentidad/gopherbot/botservice/storage"
 )
 
 func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
@@ -13,7 +13,7 @@ func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		return
 	}
 
-	sqlite := db.Respuestas{}
+	sqlite := storage.Respuestas{}
 	msg, err := sqlite.GetMsg(m.Content)
 	if err != nil {
 		if err != sql.ErrNoRows {

@@ -1,13 +1,11 @@
 
-### Ideas:
+## Por hacer:
 
-- https://github.com/2Bot/2Bot-Discord-Bot
+- Agregar un formulario web, quiza en react, para mandar el post a **webservice** que se guarda en la bd sqlite y el bot lea la data de esa bd.
 
-- https://leetcode.gin.sh/ @zeroidentidad y que tal hacer un bot, aquí en discord, que te pase ejercicios aleatorios "simples como para soltar los dedos" y puedas pedir la solución.
 
-### Por hacer:
+- Algoritmo de respuesta para challenges aleatorios dependiendo de: 
 
-- Combinar, el servicio web **challenge-svc**: [github.com/tomiok/challenge-svc](https://github.com/tomiok/challenge-svc) con el bot actual en el discord accediendo a la base de datos sqlite también.
-
-- Agregar un formulario web, quiza en react, para mandar el post a **challenge-svc** que se guarda en la bd sqlite y el bot lea la data de esa bd.
-
+    1. **level**: ["easy", "medium", "hard"] 
+    2. **challenge_type**: ["algorithm", "concurrency, "database", "web", "cli", "core"]
+    3. **id** hint: get random id between total records count

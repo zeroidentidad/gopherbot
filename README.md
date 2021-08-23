@@ -1,12 +1,12 @@
 ## Src main 3rd libs:
 
-### - Bot discord
+### - Bot service
 
 - https://github.com/bwmarrin/discordgo
 
 - https://github.com/mattn/go-sqlite3
 
-### - Challenges web service
+### - Web service
 
 - https://github.com/gofiber/fiber/v2
 

@@ -7,20 +7,20 @@ import (
 	"syscall"
 
 	"github.com/bwmarrin/discordgo"
-	"github.com/zeroidentidad/gopherbot/config"
-	"github.com/zeroidentidad/gopherbot/messages"
-	"github.com/zeroidentidad/gopherbot/status"
+	"github.com/zeroidentidad/gopherbot/botservice/messages"
+	"github.com/zeroidentidad/gopherbot/botservice/status"
+	"github.com/zeroidentidad/gopherbot/global"
 	"github.com/zeroidentidad/gopherbot/webservice"
 	"github.com/zeroidentidad/gopherbot/webservice/storage"
 )
 
 func main() {
-	dg, err := discordgo.New("Bot " + config.TOKEN)
+	dg, err := discordgo.New("Bot " + global.TOKEN)
 	if err != nil {
 		log.Fatal("Session error:", err.Error())
 		return
 	}
-	dg.Debug = true
+	// dg.Debug = true
 
 	// Register bot handlers.
 	dg.AddHandler(messages.MessageCreate)
@@ -35,7 +35,7 @@ func main() {
 	// Register web svc handlers.
 	go func() {
 		storage.Migrate()
-		webservice.Start(config.Port())
+		webservice.Start(global.Port())
 	}()
 
 	// Until CTRL-C or another term signal.
