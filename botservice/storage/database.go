@@ -2,8 +2,11 @@ package storage
 
 import (
 	"database/sql"
+	"fmt"
+	"log"
 
-	_ "github.com/mattn/go-sqlite3"
+	_ "github.com/go-sql-driver/mysql"
+	"github.com/zeroidentidad/gopherbot/global"
 )
 
 type Respuestas struct {
@@ -14,28 +17,17 @@ type Respuestas struct {
 
 var db *sql.DB
 
-func SQLiteConn() *sql.DB {
+func MySqlConn() *sql.DB {
 	if db != nil {
 		return db
 	}
 
-	db, err := sql.Open("sqlite3", "data.sqlite")
+	dsn := fmt.Sprintf(global.DB_USER+":"+global.DB_PASS+"@tcp(%s:3306)/%s?collation=utf8mb4_general_ci&parseTime=true", global.DB_HOST, global.DB_NAME)
+
+	db, err := sql.Open("mysql", dsn)
 	if err != nil {
-		panic(err)
+		log.Fatal(err.Error())
 	}
 
 	return db
-}
-
-func (res *Respuestas) GetMsg(cmd string) (*Respuestas, error) {
-	db := SQLiteConn()
-	q := `SELECT id, comando, respuesta FROM messages WHERE comando = ?`
-
-	err := db.QueryRow(q, cmd).Scan(&res.ID, &res.Comando, &res.Respuesta)
-	defer db.Close()
-	if err != nil {
-		return &Respuestas{}, err
-	}
-
-	return res, nil
 }
