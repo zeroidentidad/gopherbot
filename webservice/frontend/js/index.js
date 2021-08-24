@@ -1,11 +1,11 @@
 // simple ajax post
 $(document).ready(function () {
     let path=window.location.protocol+'//'+window.location.hostname+':'+window.location.port;
-    $("form").submit(function (event) {
+    $("form").submit(function (e) {
         let formData={
             description: $("#description").val(),
             level: $("#level").val(),
-            challenge_type: $("#challenge_type").val(),
+            challengetype: $("#challengetype").val()
         };
 
         $.ajax({
@@ -17,8 +17,9 @@ $(document).ready(function () {
         }).done(function (data) {
             // log response
             console.log(data);
+            alert("Desafio recibido y guardado correctamente 😎");
         });
 
-        event.preventDefault();
+        e.preventDefault();
     });
 });
