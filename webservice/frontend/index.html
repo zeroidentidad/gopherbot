@@ -4,9 +4,38 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gopherbot</title>
+    <title>Gopherbot - Gophers LATAM</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/index.js"></script>
+    <link rel="stylesheet" href="./css/bootstrap.min.css"/>
 </head>
 <body>
-    <h2>It works!</h2>
+    <div class="container col-sm-6 col-sm-offset-3">
+        <center>
+            <h1>Envía un challenge al Gopherbot</h1>
+            <img src="./img/gophers-latam.png" alt="Gophers LATAM">
+        </center>
+        <form>
+            <div id="description-group" class="form-group">
+                <label for="description">Descripción:</label>
+                <input type="text" class="form-control" id="description" placeholder="Algoritmo para que ella te ame x'D" />
+            </div>
+    
+            <div id="level-group" class="form-group">
+                <label for="level">Nivel:</label>
+                <input type="text" class="form-control" id="level" placeholder="easy" />
+            </div>
+    
+            <div id="challenge_type-group" class="form-group">
+                <label for="challenge_type">Tipo de desafío:</label>
+                <input type="text" class="form-control" id="challenge_type" />
+            </div>
+            <br>
+            <center>
+                <button type="submit" class="btn btn-success">Enviar</button>
+            </center>
+        </form>
+    </div>
 </body>
 </html>

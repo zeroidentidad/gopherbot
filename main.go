@@ -8,7 +8,6 @@ import (
 
 	"github.com/bwmarrin/discordgo"
 	"github.com/zeroidentidad/gopherbot/botservice/messages"
-	"github.com/zeroidentidad/gopherbot/botservice/status"
 	"github.com/zeroidentidad/gopherbot/global"
 	"github.com/zeroidentidad/gopherbot/webservice"
 	"github.com/zeroidentidad/gopherbot/webservice/storage"
@@ -24,7 +23,7 @@ func main() {
 
 	// Register bot handlers.
 	dg.AddHandler(messages.MessageCreate)
-	dg.AddHandler(status.SetStatus)
+	dg.AddHandler(messages.SetStatus)
 
 	err = dg.Open()
 	if err != nil {
