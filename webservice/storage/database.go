@@ -1,9 +1,12 @@
 package storage
 
 import (
+	"fmt"
 	"log"
+	"time"
 
-	"gorm.io/driver/sqlite"
+	"github.com/zeroidentidad/gopherbot/global"
+	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
@@ -17,11 +20,21 @@ func Get() *gorm.DB {
 }
 
 func get() *gorm.DB {
-	db, err := gorm.Open(sqlite.Open("data.sqlite"), &gorm.Config{})
+	dsn := fmt.Sprintf(global.DB_USER+":"+global.DB_PASS+"@tcp(%s:3306)/%s?collation=utf8mb4_general_ci&parseTime=True&loc=Local", global.DB_HOST, global.DB_NAME)
+	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
 	if err != nil {
 		log.Fatal(err.Error())
 	}
+
+	// pool settings:
+	pool, err := db.DB()
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+	pool.SetConnMaxLifetime(time.Minute * 3)
+	pool.SetMaxOpenConns(10)
+	pool.SetMaxIdleConns(10)
 
 	return db
 }

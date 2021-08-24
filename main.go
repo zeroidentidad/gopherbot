@@ -32,7 +32,7 @@ func main() {
 		return
 	}
 
-	// Register web svc handlers.
+	// Register web handlers.
 	go func() {
 		storage.Migrate()
 		webservice.Start(global.Port())
