@@ -14,13 +14,9 @@
 
 - https://gorm.io/gorm
 
-## Deploy wakeup (in progress):
+## Deploy wakeup & usage info (in progress):
 
 - https://gopherbot0.herokuapp.com
-
-## Usage info (in progress):
-
-- https://zeroidentidad.github.io/gopherbot
 
 ## Adoption, tests, contrib:
 
