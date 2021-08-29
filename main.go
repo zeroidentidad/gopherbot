@@ -22,7 +22,7 @@ func main() {
 	// dg.Debug = true
 
 	// Register bot handlers.
-	dg.AddHandler(messages.MessageCreate)
+	dg.AddHandler(messages.MessageCmd)
 	dg.AddHandler(messages.SetStatus)
 
 	err = dg.Open()

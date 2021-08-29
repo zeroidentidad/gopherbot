@@ -2,24 +2,47 @@ package messages
 
 import (
 	"database/sql"
+	"strings"
 
 	"github.com/bwmarrin/discordgo"
 	"github.com/zeroidentidad/gopherbot/botservice/storage"
 )
 
-func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
+func MessageCmd(s *discordgo.Session, m *discordgo.MessageCreate) {
 	// Ignore msg by itself
 	if m.Author.ID == s.State.User.ID {
 		return
 	}
 
-	sqlite := storage.Respuestas{}
-	msg, err := sqlite.GetMsg(m.Content)
-	if err != nil {
-		if err != sql.ErrNoRows {
-			_, _ = s.ChannelMessageSend(m.ChannelID, `**No sé, error en comando**`)
+	if !strings.Contains(m.Content, ".go challenge") {
+
+		mysql := storage.RespuestasCmd{}
+		msg, err := mysql.GetCmd(m.Content)
+		if err != nil {
+			if err != sql.ErrNoRows {
+				_, _ = s.ChannelMessageSend(m.ChannelID, `**No sé, error en comando**`)
+			}
+		} else {
+			_, _ = s.ChannelMessageSend(m.ChannelID, msg.Respuesta)
 		}
+
 	} else {
-		_, _ = s.ChannelMessageSend(m.ChannelID, msg.Respuesta)
+
+		mysql := storage.RespuestasChallenge{}
+		msg, err := mysql.GetChallenge(m.Content)
+		if err != nil {
+			if err != sql.ErrNoRows {
+				_, _ = s.ChannelMessageSend(m.ChannelID, `**Ups, intenta de nuevo, sin espacios extras**`)
+			}
+		} else {
+			message := `[*Challenge*] 
+			-**Level:** ` + msg.Level + ` -**Type:** ` + msg.ChallengeType + `
+			-**Description:**
+			` + msg.Description
+
+			_, _ = s.ChannelMessageSend(m.ChannelID, message)
+		}
+
 	}
+
 }

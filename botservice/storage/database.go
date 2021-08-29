@@ -9,12 +9,6 @@ import (
 	"github.com/zeroidentidad/gopherbot/global"
 )
 
-type Respuestas struct {
-	ID        int
-	Comando   string
-	Respuesta string
-}
-
 var db *sql.DB
 
 func MySqlConn() *sql.DB {
