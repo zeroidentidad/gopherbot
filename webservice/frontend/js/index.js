@@ -1,14 +1,16 @@
 // simple ajax post
 $(document).ready(function () {
-    Notification.requestPermission().then((res) => { console.log(res); });
-    let path=window.location.protocol+'//'+window.location.hostname+':'+window.location.port;
+    Notification.requestPermission().then((res) => {
+        console.log(res);
+    });
+    let path = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port;
     $("form").submit(function (e) {
-        let description=$("#description").val();
-        let level=$("#level").val();
-        let challengetype=$("#challengetype").val();
+        let description = $("#description").val();
+        let level = $("#level").val();
+        let challengetype = $("#challengetype").val();
 
-        if (description!=""&&level!=""&&challengetype!="") {
-            let formData={
+        if (description != "" && level != "" && challengetype != "") {
+            let formData = {
                 description,
                 level,
                 challengetype
