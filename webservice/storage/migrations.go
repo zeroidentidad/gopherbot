@@ -11,6 +11,6 @@ func Migrate() {
 
 	err := db.AutoMigrate(challenges.Challenge{})
 	if err != nil {
-		log.Fatal("Cannot do migration:", err.Error())
+		log.Fatal("cannot do migration:", err.Error())
 	}
 }

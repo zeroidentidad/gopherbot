@@ -16,20 +16,20 @@ func MessageCmd(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	if !strings.Contains(m.Content, ".go challenge") {
 
-		mysql := storage.RespuestasCmd{}
+		mysql := storage.ResponseCMD{}
 		msg, err := mysql.GetCmd(m.Content)
 		if err != nil {
 			if err != sql.ErrNoRows {
 				_, _ = s.ChannelMessageSend(m.ChannelID, `**No sé, error en comando**`)
 			}
 		} else {
-			_, _ = s.ChannelMessageSend(m.ChannelID, msg.Respuesta)
+			_, _ = s.ChannelMessageSend(m.ChannelID, msg.Res)
 		}
 
 	} else {
 
-		mysql := storage.RespuestasChallenge{}
-		msg, err := mysql.GetChallenge(m.Content)
+		r := storage.ChallengeResponse{}
+		msg, err := r.GetChallenge(m.Content)
 		if err != nil {
 			if err != sql.ErrNoRows {
 				_, _ = s.ChannelMessageSend(m.ChannelID, `**Ups, intenta de nuevo, sin espacios extras**`)
