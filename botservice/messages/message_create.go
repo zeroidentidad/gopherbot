@@ -2,6 +2,7 @@ package messages
 
 import (
 	"database/sql"
+	"log"
 	"strings"
 
 	"github.com/bwmarrin/discordgo"
@@ -40,9 +41,12 @@ func MessageCmd(s *discordgo.Session, m *discordgo.MessageCreate) {
 			-**Description:**
 			` + msg.Description
 
-			_, _ = s.ChannelMessageSend(m.ChannelID, message)
+			_, err = s.ChannelMessageSend(m.ChannelID, message)
+
+			if err != nil {
+				log.Println("cannot send message")
+				log.Println(err.Error())
+			}
 		}
-
 	}
-
 }

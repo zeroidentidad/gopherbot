@@ -29,7 +29,7 @@ github.com/jinzhu/now
 github.com/klauspost/compress/flate
 github.com/klauspost/compress/gzip
 github.com/klauspost/compress/zlib
-# github.com/tomiok/challenge-lib v0.0.1
+# github.com/tomiok/challenge-lib v0.0.4
 ## explicit
 github.com/tomiok/challenge-lib
 # github.com/valyala/bytebufferpool v1.0.0

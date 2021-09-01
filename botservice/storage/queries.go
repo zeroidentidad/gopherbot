@@ -3,9 +3,7 @@ package storage
 import (
 	"github.com/tomiok/challenge-lib"
 	"log"
-	"math/rand"
 	"strings"
-	"time"
 )
 
 func (res *ResponseCMD) GetCmd(cmd string) (*ResponseCMD, error) {
@@ -24,18 +22,13 @@ func (res *ResponseCMD) GetCmd(cmd string) (*ResponseCMD, error) {
 func (res *ChallengeResponse) GetChallenge(cmd string) (*ChallengeResponse, error) {
 	values := strings.Split(cmd, " ")
 
-	if len(values) == 0 || len(values) == 1 {
+	if len(values) == 0 || len(values) == 1 || len(values) == 3 {
 		log.Println("using default values for find a challenge")
 		message := challengelib.FindChallenge("easy", "backend")
-		return BuildResponse(message), nil
+		return BuildResponse(message, "easy", "backend"), nil
 	}
-
-	message := challengelib.FindChallenge(values[0], values[1])
-	return BuildResponse(message), nil
-}
-
-func randomId(count int) int {
-	rand.Seed(time.Now().UTC().UnixNano())
-	// valor entre 1 y count
-	return rand.Intn(count-1) + 1
+	level := values[2]
+	challengeType := values[3]
+	message := challengelib.FindChallenge(level, challengeType)
+	return BuildResponse(message, level, challengeType), nil
 }
