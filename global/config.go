@@ -11,7 +11,7 @@ var (
 )
 
 const (
-	DB_HOST   string = "remotemysql.com"
+	DB_HOST   string = "mysql-zeroidentidad.alwaysdata.net"
 	port_conf string = "3000"
 )
 
