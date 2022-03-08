@@ -1,33 +1,27 @@
-## Src main 3rd libs:
+# Gopherbot old version (degraded).
 
-### - Bot service
+https://gopherbot0.herokuapp.com (now offline)
+
+### Bot & Web service libs:
 
 - https://github.com/bwmarrin/discordgo
 
-- https://github.com/go-sql-driver/mysql
-
-### - Web service
-
 - https://github.com/gofiber/fiber/v2
-
-- https://gorm.io/driver/mysql
 
 - https://gorm.io/gorm
 
-## Deploy wakeup & usage info (in progress):
-
-- https://gopherbot0.herokuapp.com
-
-## Adoption, tests, contrib:
+## Adoption, tests:
 
 - https://discord.io/go-latam
 
 ![](https://awebytes.files.wordpress.com/2021/08/gopherbot.png)
 
-## TODO:
+## Final note:
 
-- [ ] Algoritmo de respuesta para challenges aleatorios dependiendo de:
+Long time availability is now: 
 
-    1. **level**: ["easy", "medium", "hard"]
-    2. **challenge_type**: ["algorithm", "concurrency, "database", "web", "cli", "core"]
-    3. **id** hint: get random id between total records count
+- **Site:** https://challenbot.herokuapp.com
+
+- **Repo:** https://github.com/tomiok/challenge-svc
+
+
