@@ -2,7 +2,7 @@
 
 https://gopherbot0.herokuapp.com (now offline)
 
-### Bot & Web service libs:
+### Main bot & web service 3rd libs:
 
 - https://github.com/bwmarrin/discordgo
 
@@ -10,18 +10,16 @@ https://gopherbot0.herokuapp.com (now offline)
 
 - https://gorm.io/gorm
 
-## Adoption, tests:
+## Adoption & testing:
 
-- https://discord.io/go-latam
+- https://discord.me/gophers-latam
 
 ![](https://awebytes.files.wordpress.com/2021/08/gopherbot.png)
 
 ## Final note:
 
-Long time availability is now: 
+Development is now at: 
 
-- **Site:** https://challenbot.herokuapp.com
-
-- **Repo:** https://github.com/tomiok/challenge-svc
+- **Repo:** https://github.com/gophers-latam/challenges
 
 
