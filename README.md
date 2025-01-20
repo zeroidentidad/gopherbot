@@ -2,19 +2,11 @@
 
 https://gopherbot0.herokuapp.com (now offline)
 
-### Main bot & web service 3rd libs:
-
-- https://github.com/bwmarrin/discordgo
-
-- https://github.com/gofiber/fiber/v2
-
-- https://gorm.io/gorm
+![](https://awebytes.files.wordpress.com/2021/08/gopherbot.png)
 
 ## Adoption & testing:
 
-- https://discord.me/gophers-latam
-
-![](https://awebytes.files.wordpress.com/2021/08/gopherbot.png)
+- https://dsc.gg/gophers-latam
 
 ## Final note:
 
